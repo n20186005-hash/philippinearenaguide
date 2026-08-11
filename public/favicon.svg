@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Philippine Arena guide mark">
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="#0b121a"/>
+  <ellipse cx="32" cy="25" rx="22" ry="10.5" fill="#eef1f3"/>
+  <ellipse cx="32" cy="27" rx="18" ry="6.5" fill="#0b121a"/>
+  <g fill="#d23232">
+    <rect x="20" y="31" width="3" height="15" rx="1"/>
+    <rect x="26" y="31" width="3" height="15" rx="1"/>
+    <rect x="32" y="31" width="3" height="15" rx="1"/>
+    <rect x="38" y="31" width="3" height="15" rx="1"/>
+    <rect x="44" y="31" width="3" height="15" rx="1"/>
+  </g>
+  <rect x="14" y="49" width="36" height="3" rx="1.5" fill="#fff" opacity=".9"/>
+</svg>

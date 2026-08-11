@@ -1,0 +1,341 @@
+---
+import '../styles/global.css';
+import Logo from '../components/Logo.astro';
+
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const ogImage = Astro.site ? new URL('/images/arena-exterior.webp', Astro.site).href : '/images/arena-exterior.webp';
+const mapUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3857.5605595908023!2d120.95357089999999!3d14.793764699999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397ad90847baa5b%3A0xad841e7150c8aeea!2z6I-y5b6L5a6-5L2T6IKy6aaG!5e0!3m2!1sfil!2sph!4v1786436647471!5m2!1sfil!2sph';
+
+const attractionSchema = {
+  '@context': 'https://schema.org',
+  '@type': ['TouristAttraction', 'LocalBusiness'],
+  name: 'Philippine Arena',
+  description: 'Isang malaking indoor arena sa Ciudad de Victoria, Bulacan para sa mga konsiyerto, palakasan, pagtitipon at iba pang malalaking event.',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Ciudad de Victoria',
+    addressLocality: 'Bocaue',
+    addressRegion: 'Bulacan',
+    addressCountry: 'PH',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 14.7937647,
+    longitude: 120.9535709,
+  },
+  openingHours: 'Bukas ayon sa iskedyul at access rules ng event; walang regular na oras para sa pangkalahatang sightseeing sa loob.',
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: 3.8,
+    reviewCount: 29,
+    bestRating: 5,
+    worstRating: 1,
+  },
+  ...(Astro.site ? { url: new URL('/', Astro.site).href, image: [new URL('/images/arena-exterior.webp', Astro.site).href] } : {}),
+};
+
+const faqItems = [
+  {
+    q: 'Bukas ba araw-araw ang Philippine Arena para sa sightseeing?',
+    a: 'Hindi ito karaniwang museum o attraction na may regular na daily walk-in access. Ang pagpasok sa loob ay karaniwang nakatali sa event, organizer, ticket at security rules. Maaari ring magbago ang access sa labas ng arena kapag may setup o malaking pagtitipon.',
+  },
+  {
+    q: 'May regular na entrance fee ba?',
+    a: 'Walang iisang regular na sightseeing entrance fee para sa arena. Kapag may concert, sports event o ibang programa, ang presyo ay ayon sa ticketing partner at organizer. Huwag umasa sa lumang presyo o social-media post.',
+  },
+  {
+    q: 'Ano ang pinakamadaling biyahe mula NAIA?',
+    a: 'Pinakasimple ang pre-booked car, taxi o ride-hailing papuntang Ciudad de Victoria, karaniwang sa rutang nag-uugnay sa Skyway/NLEX. Malaki ang epekto ng trapiko at event road closures, kaya maglaan ng maluwag na buffer.',
+  },
+  {
+    q: 'May bus o public transport papunta rito?',
+    a: 'May mga bus at P2P option mula sa Metro Manila patungong Bocaue o Santa Maria, at may mga event na naglalabas ng espesyal na shuttle plan. Para sa huling bahagi ng biyahe, karaniwan ang tricycle o iba pang local transport. I-check ang operator at event advisory bago bumiyahe.',
+  },
+  {
+    q: 'May parking ba sa Philippine Arena?',
+    a: 'Oo, may malalaking parking area sa paligid ng complex, ngunit ang lot assignment, entrance, traffic flow at anumang fee ay maaaring mag-iba bawat event. Sundin ang parking pass at traffic advisory ng organizer.',
+  },
+  {
+    q: 'Gaano kaaga dapat dumating kapag may event?',
+    a: 'Dumating nang mas maaga kaysa sa normal na indoor venue dahil malaki ang crowd, haba ng lakaran at posibilidad ng NLEX/parking congestion. Gamitin bilang pangunahing batayan ang gate-opening at transport advisory ng mismong organizer.',
+  },
+  {
+    q: 'May makakainan ba sa paligid?',
+    a: 'May cafés, food stalls at kainan sa Ciudad de Victoria at Bocaue, pero puwedeng humaba ang pila sa event days. Mas praktikal na kumain bago ang peak arrival window at mag-check ng event rules para sa pagkain at inumin sa loob.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map(({q, a}) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
+---
+<!doctype html>
+<html lang="fil">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#091017" />
+    <title>Philippine Arena — Gabay sa Pagbisita, Biyahe at Event Day</title>
+    <meta name="description" content="Praktikal na gabay sa Philippine Arena sa Bulacan: paano pumunta mula NAIA at Metro Manila, parking, ticket, oras ng pagdating, pagkain at kalapit na pasyalan." />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Philippine Arena — Gabay sa Pagbisita" />
+    <meta property="og:description" content="Biyahe, parking, ticket, pagkain at event-day tips para sa Philippine Arena sa Ciudad de Victoria, Bulacan." />
+    <meta property="og:image" content={ogImage} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta property="og:locale" content="fil_PH" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/favicon-16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <script type="application/ld+json" set:html={JSON.stringify(attractionSchema)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-HXM22WWPKP"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-HXM22WWPKP');
+    </script>
+  </head>
+  <body>
+    <header>
+      <div class="shell nav">
+        <Logo />
+        <nav class="nav-links" aria-label="Pangunahing nabigasyon">
+          <a href="#kilalanin">Kilalanin</a>
+          <a href="#plano">Plano</a>
+          <a href="#biyahe">Biyahe</a>
+          <a href="#parking">Parking</a>
+          <a href="#malapit">Malapit</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="shell hero-grid">
+          <div>
+            <span class="eyebrow">Ciudad de Victoria · Bulacan</span>
+            <h1 id="hero-title">PHILIPPINE <span>ARENA</span></h1>
+            <p class="hero-lead">Hindi ordinaryong pasyalan: isa itong dambuhalang indoor venue na nabubuhay sa araw ng konsiyerto, laro at malalaking pagtitipon. Narito ang gabay para makarating, makaparada at makapasok nang mas handa.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#biyahe">Planuhin ang biyahe →</a>
+              <a class="btn btn-ghost" href="#plano">Ticket at oras ng dating</a>
+            </div>
+          </div>
+          <aside class="hero-card" aria-label="Mahahalagang detalye">
+            <span class="eyebrow">World-scale venue</span>
+            <strong>51,929</strong>
+            <p>seating capacity na kinikilala sa tala ng Guinness World Records para sa mixed-use indoor theatre.</p>
+            <div class="mini">
+              <div><b>14.7937647</b><span>latitude</span></div>
+              <div><b>120.9535709</b><span>longitude</span></div>
+              <div><b>Event-based</b><span>access sa loob</span></div>
+              <div><b>NLEX</b><span>pangunahing road link</span></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <div class="fact-band" aria-label="Mabilisang impormasyon">
+        <div class="shell fact-grid">
+          <div class="fact"><b>Bulacan</b><span>hilaga ng Metro Manila</span></div>
+          <div class="fact"><b>Indoor</b><span>concert · sports · gatherings</span></div>
+          <div class="fact"><b>One-sided bowl</b><span>nakatuon sa pangunahing stage</span></div>
+          <div class="fact"><b>Populous</b><span>venue architecture</span></div>
+        </div>
+      </div>
+
+      <section class="section" id="kilalanin">
+        <div class="shell intro-grid">
+          <div class="photo-frame">
+            <img src="/images/arena-exterior.webp" alt="Philippine Arena at Philippine Sports Stadium mula sa bypass road sa Bocaue" loading="lazy" width="1800" height="810" />
+            <span class="photo-tag">Ang malawak na oval roof at puting structural frame ang biswal na karakter ng arena.</span>
+          </div>
+          <div>
+            <span class="eyebrow">Kilalanin ang arena</span>
+            <h2 class="section-title">Isang gusaling ginawa para sa napakalaking crowd.</h2>
+            <p class="section-copy">Matatagpuan ang Philippine Arena sa Ciudad de Victoria, isang malaking complex na sumasaklaw sa Bocaue at Santa Maria, Bulacan. Dinisenyo ang arena bilang multipurpose gathering space—mula sa malalaking religious assembly hanggang basketball, international sports at stadium-scale concerts.</p>
+            <p class="stacked-note"><strong>Hindi ito regular na walk-in attraction.</strong> Kung ang pakay mo ay makita ang loob, planuhin ang pagbisita sa araw ng opisyal na event at sundin ang gate, bag at ticket rules ng organizer.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section light" id="plano">
+        <div class="shell">
+          <span class="eyebrow">Bago umalis</span>
+          <h2 class="section-title">Ticket, timing at tagal ng pagbisita.</h2>
+          <p class="section-copy">Mas mahalaga rito ang event plan kaysa “tourist opening hours.” I-check muna ang organizer, ticketing partner at event-day advisory bago pumunta.</p>
+          <div class="grid-3">
+            <article class="info-card">
+              <span class="num">01</span><span class="chip">TICKET / BAYAD</span>
+              <h3>Walang iisang entrance fee</h3>
+              <p>Ang halaga ng ticket ay depende sa concert, sports event o programa. Para sa ordinaryong exterior visit, huwag ipalagay na may garantisadong access sa loob. Ang parking at concessions ay maaari ring may sariling event-specific charge.</p>
+            </article>
+            <article class="info-card">
+              <span class="num">02</span><span class="chip">PINAKAMAGANDANG ORAS</span>
+              <h3>Event day: maaga. Photo stop: hapon.</h3>
+              <p>Sa ticketed event, dumating nang may malaking buffer bago magbukas ang gate. Para sa exterior photos sa araw na walang major event, mas kaaya-aya ang huling bahagi ng hapon—pero laging sumunod sa security perimeter at access rules.</p>
+            </article>
+            <article class="info-card">
+              <span class="num">03</span><span class="chip">TAGAL</span>
+              <h3>1–2 oras sa complex; mas mahaba kapag event</h3>
+              <p>Kung exterior at kalapit na spot lang, sapat na ang maikling side trip. Sa event day, isama sa plano ang buong event plus mahabang allowance para sa pila, lakaran, parking at paglabas ng crowd.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="event-strip" aria-label="Karanasan sa loob ng arena">
+        <div class="event-photo" role="img" aria-label="Punong Philippine Arena sa opening ceremony ng 2019 Southeast Asian Games"></div>
+        <div class="event-copy">
+          <span class="eyebrow">Sa loob</span>
+          <h2>Scale muna bago spectacle.</h2>
+          <p>Ang bowl ay nakatuon sa isang focal stage, kaya mas kahawig nito ang isang napakalaking indoor theatre kaysa karaniwang bilog na arena. Sa major events, ang ilaw, tunog at sabay-sabay na paggalaw ng sampu-sampung libong tao ang tunay na karakter ng venue.</p>
+        </div>
+      </section>
+
+      <section class="section" id="biyahe">
+        <div class="shell transport-layout">
+          <div>
+            <span class="eyebrow">Detalyadong transportasyon</span>
+            <h2 class="section-title">Pumunta na may Plan A at Plan B.</h2>
+            <p class="section-copy">Malapit ang complex sa NLEX, pero nag-iiba ang road flow kapag may malaking event. Ang pinakaligtas na prinsipyo: sundin ang pinakabagong organizer at NLEX advisory, hindi lumang route screenshot.</p>
+          </div>
+          <div class="route-list">
+            <article class="route">
+              <div class="route-icon" aria-hidden="true">✈</div>
+              <div><h3>Mula NAIA / airport</h3><p><b>Pinakasimple:</b> pre-booked car, taxi o ride-hailing direkta sa Ciudad de Victoria. Karaniwang dadaanan ang mga expressway connection patungong NLEX. Kung public transport, pumunta muna sa isang Metro Manila bus/P2P hub, saka bumiyahe patungong Bocaue o Santa Maria at kumpletuhin ang huling bahagi sa local transport.</p></div>
+            </article>
+            <article class="route">
+              <div class="route-icon" aria-hidden="true">▣</div>
+              <div><h3>Bus / P2P mula Metro Manila</h3><p>May mga rutang nagmumula sa mga hub gaya ng <b>North EDSA/Trinoma, Cubao, Monumento o PITX</b> patungong Bocaue, Santa Maria o kalapit na terminal depende sa operator. Mula roon, tricycle o local ride ang karaniwang last mile. Sa ilang malaking event, may espesyal na shuttle—gamitin lamang kapag opisyal na inanunsyo.</p></div>
+            </article>
+            <article class="route">
+              <div class="route-icon" aria-hidden="true">◆</div>
+              <div><h3>Taxi / Grab / ride-hailing</h3><p>I-set ang pin sa <b>Philippine Arena, Ciudad de Victoria</b>. Sa event day, maaaring ilipat ang drop-off/pick-up zone at puwedeng hindi makalapit ang sasakyan sa mismong gate. Magtakda ng meeting point at maghanda sa lakaran.</p></div>
+            </article>
+            <article class="route">
+              <div class="route-icon" aria-hidden="true">➜</div>
+              <div><h3>Private car — mula Metro Manila</h3><p>Gamitin ang <b>NLEX northbound</b> at sundin ang mga sign/advisory para sa Ciudad de Victoria / Philippine Arena. May event-specific traffic management kaya maaaring magbago ang entrance, lane at parking route. Ihanda ang RFID para sa expressway.</p></div>
+            </article>
+            <article class="route">
+              <div class="route-icon" aria-hidden="true">⇣</div>
+              <div><h3>Mula Northern Luzon</h3><p>Sa <b>NLEX southbound</b>, sundin ang current routing para sa Ciudad de Victoria at designated parking. Huwag umasa na pareho ang gate sa pagpasok at paglabas; crowd control ang masusunod kapag malaki ang event.</p></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-label="Mapa">
+        <div class="shell">
+          <div class="map-wrap">
+            <iframe src={mapUrl} title="Mapa ng Philippine Arena sa Filipino" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <section class="section light" id="parking">
+        <div class="shell">
+          <span class="eyebrow">Parking</span>
+          <h2 class="section-title">Malawak ang lots. Ang bottleneck ay paglabas.</h2>
+          <p class="section-copy">May malalaking parking area sa complex at karaniwang hinahati sa lettered lots. Ngunit ang eksaktong assignment, gate, presyo at vehicle rules ay maaaring magbago bawat event.</p>
+          <div class="parking-grid">
+            <article class="parking-card">
+              <h3>Praktikal na parking checklist</h3>
+              <ul>
+                <li>Basahin ang event advisory para sa tamang lot at gate bago bumiyahe.</li>
+                <li>Kung first-come-first-served ang setup, mas maagang dating ang mas praktikal.</li>
+                <li>Screenshot ang parking pin at tandaan ang row/landmark bago pumasok.</li>
+                <li>Maghanda sa controlled exit at mabagal na paglabas pagkatapos ng major event.</li>
+                <li>Huwag gumamit ng lumang parking fee bilang kasalukuyang presyo.</li>
+              </ul>
+            </article>
+            <div class="parking-card facade-card">
+              <p class="caption">NLEX ang pangunahing expressway approach. Ang event-day routing at designated parking gate pa rin ang masusunod.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="malapit">
+        <div class="shell intro-grid">
+          <div>
+            <span class="eyebrow">Kainan sa paligid</span>
+            <h2 class="section-title">Kumain bago dumagsa ang crowd.</h2>
+            <p class="section-copy">Limitado ang madaling makuhang pagkain kapag sabay-sabay ang dating ng libo-libong tao. Mas praktikal na pumili ng kainan sa Ciudad de Victoria/Bocaue bago ang peak event window.</p>
+            <div class="nearby-grid">
+              <article class="place"><small>Food park</small><h3>Bocaue Plaza Centralle</h3><p>Maraming quick-service option; madaling isama bago o pagkatapos ng event.</p></article>
+              <article class="place"><small>Café</small><h3>OK Cafe — PH Arena area</h3><p>Kape at casual meals malapit sa complex; i-check ang event-day hours.</p></article>
+              <article class="place"><small>Local comfort food</small><h3>Lugajuan</h3><p>Simple at lokal na option sa Bocaue side para sa mas mabilis na kain.</p></article>
+              <article class="place"><small>Café / greenery</small><h3>Forest Cafe</h3><p>Mas relaxed na café stop kung may oras bago bumiyahe papunta sa gates.</p></article>
+            </div>
+          </div>
+          <div>
+            <span class="eyebrow">Kalapit na pasyalan</span>
+            <h2 class="section-title">Gawing half-day ang biyahe.</h2>
+            <p class="section-copy">Kung maaga ang dating, may ilang spot sa loob o malapit sa Ciudad de Victoria na puwedeng ipares sa arena visit, depende sa kanilang sariling access at operating rules.</p>
+            <div class="nearby-grid">
+              <article class="place"><small>Sa complex</small><h3>The Garden — Ciudad de Victoria</h3><p>Landscaped park na puwedeng idagdag sa maagang itinerary.</p></article>
+              <article class="place"><small>Sports</small><h3>Philippine Sports Stadium</h3><p>Outdoor football at athletics venue na katabi ng arena.</p></article>
+              <article class="place"><small>Heritage / faith</small><h3>Shrine of St. Andrew Kim Tae-gon</h3><p>Distinctive Korean-influenced church architecture sa Bocaue.</p></article>
+              <article class="place"><small>Garden stop</small><h3>Karilagan Stevia Farm & Pavilion</h3><p>Greenery at café-style side trip sa Bocaue kung may dagdag na oras.</p></article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section light" id="faq">
+        <div class="shell">
+          <span class="eyebrow">FAQ</span>
+          <h2 class="section-title">Mga tanong bago pumunta.</h2>
+          <div class="faq-list">
+            {faqItems.map((item) => (
+              <details>
+                <summary>{item.q}</summary>
+                <p>{item.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="credits" aria-label="Mga sanggunian at photo credits">
+        <div class="shell">
+          <strong>Mga sanggunian:</strong>
+          Guinness World Records, Populous, current travel listings at NLEX/event transport guides. Ang 3.8/5 aggregate rating (29 reviews) sa structured data ay mula sa kasalukuyang Tripadvisor listing na nakita sa pananaliksik at maaaring magbago.
+          <br />
+          <strong>Larawan:</strong>
+          <a href="https://commons.wikimedia.org/wiki/File:20240706_054447_Philippine_Arena_and_Philippine_Sports_Stadium.jpg" rel="noreferrer">Bagoto / Wikimedia Commons</a> ·
+          <a href="https://commons.wikimedia.org/wiki/File:SEA_Games_2019_opening_at_the_Philippine_Arena_-_parade_PH_(Bocaue,_Bulacan;_11-30-2019).jpg" rel="noreferrer">Patrick Roque / Wikimedia Commons</a> ·
+          <a href="https://commons.wikimedia.org/wiki/File:NLEX_Distance_Sign_-_Philippine_Arena_2,_Bocaue_4,_Tambubong_5.png" rel="noreferrer">PengualaHeadphones / Wikimedia Commons</a>.
+          Ang arena photos ay CC BY-SA 4.0; ang NLEX sign graphic ay CC0. Naka-local copy ang lahat ng images sa site.
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="shell footer-grid">
+        <div>
+          <Logo />
+          <p class="footer-statement">Independenteng gabay sa pagbisita lamang ito at hindi opisyal na website, hindi kaanib, at hindi ineendorso ng Philippine Arena, Iglesia Ni Cristo, Ciudad de Victoria, event organizers o ticketing partners.</p>
+        </div>
+        <div class="footer-links">
+          <a href="#plano">Ticket / Bayad</a>
+          <a href="#biyahe">Transportasyon</a>
+          <a href="#parking">Parking</a>
+          <a href="#faq">FAQ</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
