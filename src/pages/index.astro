@@ -221,9 +221,12 @@ const faqSchema = {
         <nav class="nav-links" aria-label="Pangunahing nabigasyon">
           <a href="#kilalanin">Kilalanin</a>
           <a href="#plano">Plano</a>
+          <a href="#seating">Seating</a>
           <a href="#biyahe">Biyahe</a>
           <a href="#parking">Parking</a>
+          <a href="#rules">Rules</a>
           <a href="#malapit">Malapit</a>
+          <a href="#hotels">Hotel</a>
           <a href="#faq">FAQ</a>
         </nav>
       </div>
@@ -245,6 +248,10 @@ const faqSchema = {
             <span class="eyebrow">World-scale venue</span>
             <strong>51,929</strong>
             <p>seating capacity na kinikilala sa tala ng Guinness World Records para sa mixed-use indoor theatre.</p>
+            <div class="rating">
+              <b>{ratingValue} <span class="stars" aria-hidden="true">★★★★½</span></b>
+              <span>Google rating · {reviewCount} na review</span>
+            </div>
             <div class="mini">
               <div><b>14.7937647</b><span>latitude</span></div>
               <div><b>120.9535709</b><span>longitude</span></div>
@@ -313,6 +320,23 @@ const faqSchema = {
         </div>
       </section>
 
+      <section class="section light" id="seating">
+        <div class="shell">
+          <span class="eyebrow">Seating plan at seat views</span>
+          <h2 class="section-title">Piliin ang upuan ayon sa stage, hindi ayon sa gitna.</h2>
+          <p class="section-copy">Dahil nakatutok ang bowl sa iisang focal stage, mas mahalaga ang distansya at elevation kaysa sa posisyong "sentro." Ang eksaktong pangalan ng section, row at presyo ay nakadepende sa event at sa ticketing partner—ang seat map sa ticket page ang laging pinakabagong batayan.</p>
+          <div class="nearby-grid">
+            {seatingZones.map((zone) => (
+              <article class="place">
+                <small>{zone.tag}</small>
+                <h3>{zone.title}</h3>
+                <p>{zone.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section class="section" id="biyahe">
         <div class="shell transport-layout">
           <div>
@@ -348,8 +372,12 @@ const faqSchema = {
       <section class="section" aria-label="Mapa">
         <div class="shell">
           <div class="map-wrap">
-            <iframe src={mapUrl} title="Mapa ng Philippine Arena sa Filipino" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            <iframe src={mapUrl} title="Mapa ng Philippine Arena sa Bocaue, Bulacan" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
           </div>
+          <p class="map-meta">
+            <strong>Address:</strong> Philippine Arena, Bocaue Road, Ciudad de Victoria, Bocaue, Bulacan, Pilipinas · <strong>Plus code:</strong> {plusCode} ·
+            <a href={mapsLink} target="_blank" rel="noopener">Buksan sa Google Maps</a>
+          </p>
         </div>
       </section>
 
@@ -372,6 +400,23 @@ const faqSchema = {
             <div class="parking-card facade-card">
               <p class="caption">NLEX ang pangunahing expressway approach. Ang event-day routing at designated parking gate pa rin ang masusunod.</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="rules">
+        <div class="shell">
+          <span class="eyebrow">Venue rules at bag policy</span>
+          <h2 class="section-title">Bawal at payag: nasa organizer ang huling salita.</h2>
+          <p class="section-copy">Walang iisang permanenteng house rules na sumasakop sa lahat ng event—ang security plan ay inaayos bawat programa. Gamitin ang mga sumusunod bilang praktikal na inaasahan, at kumpirmahin sa opisyal na event advisory bago pumunta.</p>
+          <div class="nearby-grid">
+            {ruleGroups.map((group) => (
+              <article class="place">
+                <small>{group.chip}</small>
+                <h3>{group.title}</h3>
+                <p>{group.text}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -403,6 +448,23 @@ const faqSchema = {
         </div>
       </section>
 
+      <section class="section" id="hotels">
+        <div class="shell">
+          <span class="eyebrow">Nearby hotels at tuluyan</span>
+          <h2 class="section-title">Saan matutulog malapit sa arena?</h2>
+          <p class="section-copy">Limitado ang malalaking hotel sa mismong Bocaue, kaya praktikal na pumili ng bayan sa NLEX corridor at kumpirmahin ang biyahe papunta at pabalik sa event day. Sa mga concert dates, mabilis maubos ang room—mas maaga, mas mabuti.</p>
+          <div class="nearby-grid">
+            {stayAreas.map((area) => (
+              <article class="place">
+                <small>{area.tag}</small>
+                <h3>{area.title}</h3>
+                <p>{area.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section class="section light" id="faq">
         <div class="shell">
           <span class="eyebrow">FAQ</span>
@@ -421,7 +483,7 @@ const faqSchema = {
       <section class="credits" aria-label="Mga sanggunian at photo credits">
         <div class="shell">
           <strong>Mga sanggunian:</strong>
-          Guinness World Records, Populous, current travel listings at NLEX/event transport guides. Ang 3.8/5 aggregate rating (29 reviews) sa structured data ay mula sa kasalukuyang Tripadvisor listing na nakita sa pananaliksik at maaaring magbago.
+          Guinness World Records, Populous, current travel listings at NLEX/event transport guides. Ang 4.6/5 aggregate rating (6,798 reviews) sa structured data ay mula sa kasalukuyang Google Maps listing ng Philippine Arena (Bocaue Road, Bocaue, Bulacan) at maaaring magbago. Ang seating, bag policy at tuluyan ay inilalarawan bilang pangkalahatang gabay—ang opisyal na advisory ng organizer at ticketing partner ang palaging masusunod.
           <br />
           <strong>Larawan:</strong>
           <a href="https://commons.wikimedia.org/wiki/File:20240706_054447_Philippine_Arena_and_Philippine_Sports_Stadium.jpg" rel="noreferrer">Bagoto / Wikimedia Commons</a> ·
@@ -433,16 +495,29 @@ const faqSchema = {
     </main>
 
     <footer>
-      <div class="shell footer-grid">
-        <div>
-          <Logo />
-          <p class="footer-statement">Independenteng gabay sa pagbisita lamang ito at hindi opisyal na website, hindi kaanib, at hindi ineendorso ng Philippine Arena, Iglesia Ni Cristo, Ciudad de Victoria, event organizers o ticketing partners.</p>
+      <div class="shell">
+        <div class="footer-sources">
+          <span class="footer-sources-title">Opisyal at awtoritatibong sanggunian:</span>
+          <a href="https://www.tourism.gov.ph/" target="_blank" rel="noopener">Department of Tourism (Pilipinas)</a>
+          <a href="https://bulacan.gov.ph/" target="_blank" rel="noopener">Pamahalaang Panlalawigan ng Bulacan</a>
+          <a href="https://iglesianicristo.net/directory/locales/ciudad-de-victoria" target="_blank" rel="noopener">Iglesia Ni Cristo — Ciudad de Victoria</a>
+          <a href="https://en.wikipedia.org/wiki/Philippine_Arena" target="_blank" rel="noopener">Wikipedia: Philippine Arena</a>
+          <a href={mapsLink} target="_blank" rel="noopener">Google Maps — Philippine Arena</a>
         </div>
-        <div class="footer-links">
-          <a href="#plano">Ticket / Bayad</a>
-          <a href="#biyahe">Transportasyon</a>
-          <a href="#parking">Parking</a>
-          <a href="#faq">FAQ</a>
+        <div class="footer-grid">
+          <div>
+            <Logo />
+            <p class="footer-statement">Independenteng gabay sa pagbisita lamang ito at hindi opisyal na website, hindi kaanib, at hindi ineendorso ng Philippine Arena, Iglesia Ni Cristo, Ciudad de Victoria, event organizers o ticketing partners.</p>
+          </div>
+          <div class="footer-links">
+            <a href="#plano">Ticket / Bayad</a>
+            <a href="#seating">Seating Plan</a>
+            <a href="#biyahe">Transportasyon</a>
+            <a href="#parking">Parking</a>
+            <a href="#rules">Venue Rules</a>
+            <a href="#hotels">Hotel</a>
+            <a href="#faq">FAQ</a>
+          </div>
         </div>
       </div>
     </footer>

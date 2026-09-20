@@ -16,6 +16,10 @@ Isang one-page Astro site para sa Philippine Arena sa Bulacan. Ang visitor-facin
 
 **Isang lugar lang ang production domain:** `SITE` sa `astro.config.mjs`.
 
+Kasalukuyang nakatakda ang production domain na `https://philippinearenaguide.com`. Dahil dito, awtomatikong nabuo ang absolute canonical at `og:url`, absolute `url`/`image` sa JSON-LD, `/robots.txt` na may `Sitemap:` entry, at `/sitemap-index.xml` mula sa `@astrojs/sitemap`.
+
+Para sa indexing: isumite ang `https://philippinearenaguide.com/sitemap-index.xml` sa Google Search Console at gamitin ang URL Inspection para sa manual indexing request ng homepage.
+
 Habang blanko ang `SITE`, normal pa rin ang build:
 - walang canonical/og:url absolute tag;
 - relative ang OG image;
