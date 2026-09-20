@@ -3,17 +3,24 @@ import '../styles/global.css';
 import Logo from '../components/Logo.astro';
 
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const siteUrl = Astro.site ? new URL('/', Astro.site).href : undefined;
 const ogImage = Astro.site ? new URL('/images/arena-exterior.webp', Astro.site).href : '/images/arena-exterior.webp';
 const mapUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3857.5605595908023!2d120.95357089999999!3d14.793764699999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397ad90847baa5b%3A0xad841e7150c8aeea!2z6I-y5b6L5a6-5L2T6IKy6aaG!5e0!3m2!1sfil!2sph!4v1786436647471!5m2!1sfil!2sph';
+const mapsLink = 'https://maps.app.goo.gl/hV46DyaXKuRxUWwAA';
+const plusCode = 'QXV3+GC Bocaue, Bulacan';
+const ratingValue = '4.6';
+const reviewCount = '6,798';
 
-const attractionSchema = {
+const venueSchema = {
   '@context': 'https://schema.org',
-  '@type': ['TouristAttraction', 'LocalBusiness'],
+  '@type': ['EventVenue', 'TouristAttraction'],
   name: 'Philippine Arena',
-  description: 'Isang malaking indoor arena sa Ciudad de Victoria, Bulacan para sa mga konsiyerto, palakasan, pagtitipon at iba pang malalaking event.',
+  alternateName: ['菲律宾体育馆', 'Philippine Arena Bocaue', 'Philippine Arena Ciudad de Victoria'],
+  description:
+    'Multipurpose indoor arena sa Ciudad de Victoria, Bocaue, Bulacan na ginagamit para sa concerts, sports, religious gatherings at iba pang malalaking event. Capacity na 51,929 ang kinikilala ng Guinness World Records bilang largest mixed-use indoor theatre.',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Ciudad de Victoria',
+    streetAddress: 'Bocaue Road, Ciudad de Victoria',
     addressLocality: 'Bocaue',
     addressRegion: 'Bulacan',
     addressCountry: 'PH',
@@ -23,15 +30,31 @@ const attractionSchema = {
     latitude: 14.7937647,
     longitude: 120.9535709,
   },
+  hasMap: mapsLink,
+  maximumAttendeeCapacity: 51929,
+  amenityFeature: [
+    { '@type': 'LocationFeatureSpecification', name: 'On-site parking', value: true },
+    { '@type': 'LocationFeatureSpecification', name: 'Indoor seating', value: true },
+  ],
   openingHours: 'Bukas ayon sa iskedyul at access rules ng event; walang regular na oras para sa pangkalahatang sightseeing sa loob.',
   aggregateRating: {
     '@type': 'AggregateRating',
-    ratingValue: 3.8,
-    reviewCount: 29,
-    bestRating: 5,
-    worstRating: 1,
+    ratingValue: '4.6',
+    reviewCount: '6798',
+    bestRating: '5',
+    worstRating: '1',
   },
-  ...(Astro.site ? { url: new URL('/', Astro.site).href, image: [new URL('/images/arena-exterior.webp', Astro.site).href] } : {}),
+  sameAs: [
+    'https://en.wikipedia.org/wiki/Philippine_Arena',
+    'https://iglesianicristo.net/directory/locales/ciudad-de-victoria',
+  ],
+  ...(siteUrl
+    ? {
+        '@id': `${siteUrl}#venue`,
+        url: siteUrl,
+        image: [ogImage],
+      }
+    : {}),
 };
 
 const faqItems = [
@@ -63,6 +86,86 @@ const faqItems = [
     q: 'May makakainan ba sa paligid?',
     a: 'May cafés, food stalls at kainan sa Ciudad de Victoria at Bocaue, pero puwedeng humaba ang pila sa event days. Mas praktikal na kumain bago ang peak arrival window at mag-check ng event rules para sa pagkain at inumin sa loob.',
   },
+  {
+    q: 'Ano ang seating plan o seating chart ng Philippine Arena?',
+    a: 'Ang bowl ay nakaharap sa iisang focal stage, kaya karaniwan itong hinahati sa mga seksyong malapit sa stage (patron / lower box), mas mataas na tier (upper box) at general admission o floor standing sa ilang concert setup. Ang eksaktong pangalan ng section, row at presyo ay nakadepende sa event at sa ticketing partner, kaya basahin ang seat map na ibinigay sa ticket page bago bumili.',
+  },
+  {
+    q: 'Ano ang bawal dalhin sa loob (bag policy)?',
+    a: 'Ang bag policy ay itinatakda ng organizer at ng security ng venue, at maaaring mag-iba bawat event. Karaniwang isinasailalim sa inspection ang lahat ng bag, at madalas na limitado ang laki nito; kabilang sa madalas na bawal ang outside food at drinks, professional camera at recording gear, matitigas na bag, payong na may matulis na dulo at anumang bagay na itinuturing na delikado. Pinakaligtas na basahin ang event advisory bago pumunta at magdala lamang ng maliit na bag.',
+  },
+  {
+    q: 'Saan puwedeng mag-stay malapit sa Philippine Arena?',
+    a: 'Maraming concert-goer ang pumipili ng tuluyan sa Bocaue, Santa Maria, Marilao o Guiguinto para mas maikli ang event-day biyahe; may mas maraming hotel option din sa mga kalapit na bayan na may NLEX access. Kapag gabi ang tapos ng event, isaalang-alang ang maagang booking, availability ng ride pabalik at kung kailangan ng parking sa tuluyan.',
+  },
+  {
+    q: 'Saan makikita ang schedule ng concerts at events sa Philippine Arena?',
+    a: 'Walang nakatakdang permanenteng schedule ang venue—ang lineup ay inaanunsyo ng mga organizer at ticketing partner. Sundin ang opisyal na anunsyo ng artist, promoter o ticketing platform para sa petsa, gate opening at ticket release, at huwag umasa sa hindi opisyal na listahan.',
+  },
+];
+
+const seatingZones = [
+  {
+    tag: 'Patron / Lower Box',
+    title: 'Malapit sa stage',
+    text: 'Pinakamalapit na seated tier at karaniwang pinakamahal. Dito pinakamalakas ang tunog at pinakamalapit ang view, ngunit maaaring limitado ang legroom at masikip ang daanan papuntang upuan.',
+  },
+  {
+    tag: 'Upper Box',
+    title: 'Mataas ngunit nakatuon sa stage',
+    text: 'Mas abot-kaya at mas malayo, pero nakaharap pa rin sa iisang focal stage kaya buo ang view ng production. Maging handa sa hagdanan at mas mahabang lakaran papuntang row.',
+  },
+  {
+    tag: 'General Admission / Floor',
+    title: 'Nakatayo sa harap',
+    text: 'Sa ilang concert setup, may standing area sa floor. Pinakamalapit sa performer, pero nangangailangan ng mas maagang pagpasok at mas mahabang pagtayo—suriin kung GA ang binibili mong ticket.',
+  },
+  {
+    tag: 'Accessible / Side sections',
+    title: 'Mga opsyon para sa PWD at companion',
+    text: 'Karaniwang may designated accessible seating at entry lane, ngunit iba-iba ang proseso bawat event. Makipag-ugnayan sa organizer o ticketing partner nang maaga para sa kumpirmasyon at kasamang upuan.',
+  },
+];
+
+const ruleGroups = [
+  {
+    chip: 'BAG POLICY',
+    title: 'Maliit na bag, mas mabilis na entry',
+    text: 'Inaasahan ang security inspection sa gate. Ang laki ng bag, klase ng lalagyan at bilang ng item na papayagan ay nakatakda sa event advisory—huwag itong hulaan.',
+  },
+  {
+    chip: 'BAWAL / RESTRICTED',
+    title: 'Mga karaniwang bawal sa loob',
+    text: 'Kadalasang kabilang sa restricted ang outside food at drinks, professional camera at video gear, recording device, matitigas o malalaking bag, payong na may matulis na dulo, laser pointer at anumang bagay na delikado para sa crowd.',
+  },
+  {
+    chip: 'EVENT DAY',
+    title: 'Sundin ang organizer, hindi ang tsismis',
+    text: 'Ang gate opening, re-entry, pagkain at inumin, pati na rin ang photo at video rules ay maaaring magbago bawat event. Ang opisyal na advisory ng organizer at ticketing partner ang pangunahing batayan.',
+  },
+];
+
+const stayAreas = [
+  {
+    tag: 'Bocaue / Santa Maria',
+    title: 'Pinakamalapit sa arena',
+    text: 'Pinakamaikling event-day biyahe at mas madaling bumalik pagkatapos ng concert. Limitado ang bilang ng malalaking hotel, kaya mas mabilis maubos ang room kapag may major event.',
+  },
+  {
+    tag: 'Marilao / Guiguinto / Balagtas',
+    title: 'Mas maraming option, nasa NLEX corridor',
+    text: 'May mas maraming hotel at serviced stay sa mga bayang ito, karaniwang nasa loob ng maikling NLEX drive papuntang Ciudad de Victoria. Praktikal para sa grupo na may kotse.',
+  },
+  {
+    tag: 'Quezon City / Metro Manila',
+    title: 'Mas malayo, mas maraming choice',
+    text: 'Kung wala nang malapit na room o kung isasama ang city itinerary, praktikal pa rin ang Metro Manila base dahil sa NLEX access—pero asahan ang mas mahabang event-day travel sa NLEX.',
+  },
+  {
+    tag: 'Booking tips',
+    title: 'Mag-book nang maaga sa concert dates',
+    text: 'Mabilis tumaas ang presyo at maubos ang room kapag may malaking concert. Kumpirmahin ang parking ng tuluyan, check-in cutoff para sa late arrival, at kung may shuttle o kaayusan para sa pabalik na biyahe.',
+  },
 ];
 
 const faqSchema = {
@@ -81,21 +184,27 @@ const faqSchema = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="theme-color" content="#091017" />
-    <title>Philippine Arena — Gabay sa Pagbisita, Biyahe at Event Day</title>
-    <meta name="description" content="Praktikal na gabay sa Philippine Arena sa Bulacan: paano pumunta mula NAIA at Metro Manila, parking, ticket, oras ng pagdating, pagkain at kalapit na pasyalan." />
+    <title>Philippine Arena: Gabay sa Biyahe, Seating Plan at Concerts</title>
+    <meta name="description" content="Gabay sa Philippine Arena sa Bocaue, Bulacan: paano pumunta mula NAIA at Metro Manila, parking, seating plan, bag policy at event-day tips. 4.6/5 · 6,798 reviews." />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     {canonical && <link rel="canonical" href={canonical} />}
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Philippine Arena — Gabay sa Pagbisita" />
-    <meta property="og:description" content="Biyahe, parking, ticket, pagkain at event-day tips para sa Philippine Arena sa Ciudad de Victoria, Bulacan." />
+    <meta property="og:site_name" content="Philippine Arena Guide" />
+    <meta property="og:title" content="Philippine Arena — Gabay sa Pagbisita, Seating Plan at Concerts" />
+    <meta property="og:description" content="Biyahe, parking, ticket, seating plan, venue rules at event-day tips para sa Philippine Arena sa Ciudad de Victoria, Bulacan." />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content="Philippine Arena at Philippine Sports Stadium mula sa bypass road sa Bocaue, Bulacan" />
     {canonical && <meta property="og:url" content={canonical} />}
     <meta property="og:locale" content="fil_PH" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Philippine Arena — Gabay sa Pagbisita, Seating Plan at Concerts" />
+    <meta name="twitter:description" content="Biyahe, parking, ticket, seating plan at event-day tips para sa Philippine Arena sa Bocaue, Bulacan." />
+    <meta name="twitter:image" content={ogImage} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="icon" href="/favicon-16.png" sizes="16x16" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
-    <script type="application/ld+json" set:html={JSON.stringify(attractionSchema)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify(venueSchema)}></script>
     <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
     <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-HXM22WWPKP"></script>
     <script is:inline>
