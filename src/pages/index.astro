@@ -9,7 +9,8 @@ const mapUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3857.56055
 const mapsLink = 'https://maps.app.goo.gl/hV46DyaXKuRxUWwAA';
 const plusCode = 'QXV3+GC Bocaue, Bulacan';
 const ratingValue = '4.6';
-const reviewCount = '6,798';
+const reviewCount = '6,823';
+const mapsCheckedOn = '2026-10-18';
 
 const venueSchema = {
   '@context': 'https://schema.org',
@@ -36,17 +37,9 @@ const venueSchema = {
     { '@type': 'LocationFeatureSpecification', name: 'On-site parking', value: true },
     { '@type': 'LocationFeatureSpecification', name: 'Indoor seating', value: true },
   ],
-  openingHours: 'Bukas ayon sa iskedyul at access rules ng event; walang regular na oras para sa pangkalahatang sightseeing sa loob.',
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '4.6',
-    reviewCount: '6798',
-    bestRating: '5',
-    worstRating: '1',
-  },
   sameAs: [
     'https://en.wikipedia.org/wiki/Philippine_Arena',
-    'https://iglesianicristo.net/directory/locales/ciudad-de-victoria',
+    mapsLink,
   ],
   ...(siteUrl
     ? {
@@ -58,6 +51,10 @@ const venueSchema = {
 };
 
 const faqItems = [
+  {
+    q: 'Saan matatagpuan ang Philippine Arena?',
+    a: 'Nasa Ciudad de Victoria ang Philippine Arena, sa Bocaue Road, Bocaue, Bulacan, hilaga ng Metro Manila. Gamitin ang arena pin sa Google Maps para sa lokasyon; para sa parking lot at gate, sundin ang hiwalay na event advisory ng organizer.',
+  },
   {
     q: 'Bukas ba araw-araw ang Philippine Arena para sa sightseeing?',
     a: 'Hindi ito karaniwang museum o attraction na may regular na daily walk-in access. Ang pagpasok sa loob ay karaniwang nakatali sa event, organizer, ticket at security rules. Maaari ring magbago ang access sa labas ng arena kapag may setup o malaking pagtitipon.',
@@ -184,20 +181,20 @@ const faqSchema = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="theme-color" content="#091017" />
-    <title>Philippine Arena: Gabay sa Biyahe, Seating Plan at Concerts</title>
-    <meta name="description" content="Gabay sa Philippine Arena sa Bocaue, Bulacan: paano pumunta mula NAIA at Metro Manila, parking, seating plan, bag policy at event-day tips. 4.6/5 · 6,798 reviews." />
+    <title>Philippine Arena: Lokasyon, Parking, Biyahe at Venue Rules</title>
+    <meta name="description" content="Saan ang Philippine Arena? Lokasyon sa Bocaue, Bulacan, Google Maps pin, parking at gate advice, biyahe mula Metro Manila, seating plan at venue rules." />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     {canonical && <link rel="canonical" href={canonical} />}
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Philippine Arena Guide" />
-    <meta property="og:title" content="Philippine Arena — Gabay sa Pagbisita, Seating Plan at Concerts" />
+    <meta property="og:title" content="Philippine Arena — Lokasyon, Parking at Gabay sa Pagbisita" />
     <meta property="og:description" content="Biyahe, parking, ticket, seating plan, venue rules at event-day tips para sa Philippine Arena sa Ciudad de Victoria, Bulacan." />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:alt" content="Philippine Arena at Philippine Sports Stadium mula sa bypass road sa Bocaue, Bulacan" />
     {canonical && <meta property="og:url" content={canonical} />}
     <meta property="og:locale" content="fil_PH" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Philippine Arena — Gabay sa Pagbisita, Seating Plan at Concerts" />
+    <meta name="twitter:title" content="Philippine Arena — Lokasyon, Parking at Gabay sa Pagbisita" />
     <meta name="twitter:description" content="Biyahe, parking, ticket, seating plan at event-day tips para sa Philippine Arena sa Bocaue, Bulacan." />
     <meta name="twitter:image" content={ogImage} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -238,10 +235,13 @@ const faqSchema = {
           <div>
             <span class="eyebrow">Ciudad de Victoria · Bulacan</span>
             <h1 id="hero-title">PHILIPPINE <span>ARENA</span></h1>
-            <p class="hero-lead">Hindi ordinaryong pasyalan: isa itong dambuhalang indoor venue na nabubuhay sa araw ng konsiyerto, laro at malalaking pagtitipon. Narito ang gabay para makarating, makaparada at makapasok nang mas handa.</p>
+            <p class="hero-lead"><strong>Nasa Ciudad de Victoria, Bocaue Road, Bocaue, Bulacan ang Philippine Arena.</strong> Hindi ordinaryong pasyalan: isa itong dambuhalang indoor venue na nabubuhay sa araw ng konsiyerto, laro at malalaking pagtitipon. Narito ang gabay para makarating, makaparada at makapasok nang mas handa.</p>
             <div class="hero-actions">
               <a class="btn btn-primary" href="#biyahe">Planuhin ang biyahe →</a>
               <a class="btn btn-ghost" href="#plano">Ticket at oras ng dating</a>
+              <a class="btn btn-ghost" href="#lokasyon">Lokasyon at mapa</a>
+              <a class="btn btn-ghost" href="#parking">Parking</a>
+              <a class="btn btn-ghost" href="#rules">Venue rules</a>
             </div>
           </div>
           <aside class="hero-card" aria-label="Mahahalagang detalye">
@@ -251,6 +251,7 @@ const faqSchema = {
             <div class="rating">
               <b>{ratingValue} <span class="stars" aria-hidden="true">★★★★½</span></b>
               <span>Google rating · {reviewCount} na review</span>
+              <a href={mapsLink} target="_blank" rel="noopener">Google Maps · sinuri {mapsCheckedOn}</a>
             </div>
             <div class="mini">
               <div><b>14.7937647</b><span>latitude</span></div>
@@ -369,8 +370,11 @@ const faqSchema = {
         </div>
       </section>
 
-      <section class="section" aria-label="Mapa">
+      <section class="section" id="lokasyon" aria-labelledby="location-title">
         <div class="shell">
+          <span class="eyebrow">Lokasyon at mapa</span>
+          <h2 class="section-title" id="location-title">Saan matatagpuan ang Philippine Arena?</h2>
+          <p class="section-copy">Nasa Ciudad de Victoria, Bocaue Road, Bocaue, Bulacan ang arena. Ang pin sa ibaba ay para sa venue; maaaring iba ang designated parking gate o drop-off point sa araw ng event.</p>
           <div class="map-wrap">
             <iframe src={mapUrl} title="Mapa ng Philippine Arena sa Bocaue, Bulacan" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
           </div>
@@ -483,7 +487,7 @@ const faqSchema = {
       <section class="credits" aria-label="Mga sanggunian at photo credits">
         <div class="shell">
           <strong>Mga sanggunian:</strong>
-          Guinness World Records, Populous, current travel listings at NLEX/event transport guides. Ang 4.6/5 aggregate rating (6,798 reviews) sa structured data ay mula sa kasalukuyang Google Maps listing ng Philippine Arena (Bocaue Road, Bocaue, Bulacan) at maaaring magbago. Ang seating, bag policy at tuluyan ay inilalarawan bilang pangkalahatang gabay—ang opisyal na advisory ng organizer at ticketing partner ang palaging masusunod.
+          Guinness World Records, Populous, current travel listings at NLEX/event transport guides. Ang {ratingValue}/5 rating at {reviewCount} na review ay snapshot ng Google Maps listing ng Philippine Arena na sinuri noong {mapsCheckedOn}; maaaring magbago ang mga bilang. Tingnan ang <a href={mapsLink} target="_blank" rel="noopener">kasalukuyang listing sa Google Maps</a>. Ang seating, bag policy at tuluyan ay inilalarawan bilang pangkalahatang gabay—ang opisyal na advisory ng organizer at ticketing partner ang palaging masusunod.
           <br />
           <strong>Larawan:</strong>
           <a href="https://commons.wikimedia.org/wiki/File:20240706_054447_Philippine_Arena_and_Philippine_Sports_Stadium.jpg" rel="noreferrer">Bagoto / Wikimedia Commons</a> ·

@@ -24,6 +24,8 @@ body {
   line-height: 1.6;
 }
 a { color: inherit; }
+section[id] { scroll-margin-top: 1.5rem; }
+.hero-grid > * { min-width:0; }
 ::selection { background: var(--red); color: white; }
 
 .shell { width: min(1180px, calc(100% - 2rem)); margin-inline: auto; }
@@ -48,7 +50,7 @@ header {
   background: linear-gradient(#071019cc, transparent);
 }
 .nav {
-  min-height: 86px; display:flex; align-items:center; justify-content:space-between; gap:1rem;
+  min-height: 86px; padding-block:.75rem; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem;
 }
 .brand { display:flex; align-items:center; gap:.65rem; text-decoration:none; }
 .brand-mark { width:58px; height:auto; }
@@ -85,7 +87,7 @@ header {
   align-items:end; gap:3rem; padding: 12rem 0 6rem;
 }
 .hero h1 {
-  margin:.9rem 0 1.15rem; font-size:clamp(4.6rem, 12vw, 9.8rem);
+  margin:.9rem 0 1.15rem; font-size:clamp(2.8rem, 8vw, 6.4rem);
   line-height:.78; letter-spacing:-.075em; font-weight:950;
 }
 .hero h1 span { display:block; color:transparent; -webkit-text-stroke:1.5px rgba(255,255,255,.74); }
@@ -118,6 +120,7 @@ header {
 }
 .hero-card .rating b { font-size:2rem; line-height:1; letter-spacing:-.04em; }
 .hero-card .rating .stars { font-size:1.05rem; color:var(--warm); letter-spacing:.12em; }
+.hero-card .rating a { font-size:.78rem; text-underline-offset:.2em; }
 .hero-card .rating > span { color:#9ea8af; font-size:.78rem; }
 
 .fact-band { border-block:1px solid var(--line); background:#0c151e; }
@@ -250,7 +253,7 @@ footer { padding:3.5rem 0 2rem; background:#070d12; }
 }
 @media (max-width: 560px) {
   .shell { width:min(100% - 1.25rem, 1180px); }
-  .hero h1 { font-size:clamp(4rem,22vw,6.5rem); }
+  .hero h1 { font-size:clamp(2.65rem,14.5vw,4.5rem); }
   .hero-actions .btn { width:100%; }
   .hero-card strong { font-size:2.8rem; }
   .fact-grid { grid-template-columns:1fr; }
