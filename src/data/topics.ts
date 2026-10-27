@@ -106,6 +106,14 @@ export const topics: Topic[] = [
           'May bus at P2P option mula sa Metro Manila (North EDSA/Trinoma, Cubao, Monumento, PITX) patungong Bocaue o Santa Maria. Mula roon, tricycle o local ride ang karaniwang last mile. Sa ilang malaking event, may espesyal na shuttle — gamitin lamang kung opisyal na inanunsyo.',
         ],
       },
+      {
+        id: 'landmarks',
+        title: 'Mga landmark sa daan',
+        body: [
+          'Kapag nasa NLEX na, ang mga karaniwang landmark papuntang north ay ang Tabang Interchange at ang patungong Ciudad de Victoria. Gamitin ang live navigation app habang binabasa ang opisyal na advisory — huwag umasa sa memorya o lumang ruta.',
+          'Sa mismong complex, ang Philippine Arena ay ang pinakamalaking dome; ang Philippine Sports Stadium naman ay nasa kabilang bahagi. Ang signage sa event day ay itinatakda ng organizer at LGU.',
+        ],
+      },
     ],
     faq: [
       {
@@ -119,6 +127,10 @@ export const topics: Topic[] = [
       {
         q: 'Bukas ba ito para bisitahin kahit walang event?',
         a: 'Hindi ito regular na walk-in attraction. Ang pagpasok sa loob ay nakatali sa event, organizer, ticket at security rules.',
+      },
+      {
+        q: 'Paano kung mali ang napuntahan kong exit o pin?',
+        a: 'Huwag mag-panic. Sundin ang road signage papuntang Ciudad de Victoria; karamihan ay itinatakda ng organizer at LGU sa event day. Kung naligaw, itanong sa traffic enforcer o i-set muli ang pin sa "Philippine Arena, Ciudad de Victoria."',
       },
     ],
     updated: '2026-10-27',
@@ -151,6 +163,14 @@ export const topics: Topic[] = [
           'Dumating nang mas maaga kaysa sa inaakala mo. Malaki ang crowd, haba ng lakaran at posibleng NLEX/parking congestion. Gamitin ang gate-opening time ng organizer bilang batayan.',
         ],
       },
+      {
+        id: 'prep',
+        title: 'Prep bago umalis',
+        body: [
+          'Siguraduhing may RFID para sa mabilis na NLEX toll, at mag-load ng gcash/card kung gagamitin ang electronic lanes. Mag-full tank bago umalis ng Metro Manila para iwas haba-habaang stop.',
+          'May rest stop at gas station sa along NLEX kung kailangan ng CR o pagkain, ngunit iwasang huminto nang sobrang kadalas sa event day dahil pumapangit ang traffic pagbalik.',
+        ],
+      },
     ],
     faq: [
       {
@@ -160,6 +180,10 @@ export const topics: Topic[] = [
       {
         q: 'Mas mainam bang mag-drive o mag-bus mula Manila?',
         a: 'Kung may grupo at parking pass, mas praktikal ang private car. Kung mag-isa, ang bus/P2P patungong Bocaue o Santa Maria plus tricycle ay madalas na mas simple sa event day.',
+      },
+      {
+        q: 'Anong oras dapat umalis mula Manila para sa 8PM concert?',
+        a: 'Karaniwang payo: umalis nang 3–4 oras bago ang show (hal. 4–5PM) para sa parking, security at lakaran. Kung may specific gate-opening, mas maaga pa kung gusto mong iwas ang pinakamabigat na rush.',
       },
     ],
     updated: '2026-10-27',
@@ -428,6 +452,14 @@ export const topics: Topic[] = [
           'Kunin at i-screenshot ang parking pin at tandaan ang row/landmark bago pumasok. Madaling makaligtaan ang sasakyan sa dami ng tao pagkatapos ng show.',
         ],
       },
+      {
+        id: 'walk',
+        title: 'Lakad mula lot papuntang gate',
+        body: [
+          'Hindi lahat ng lot ay katabi ng gate. Ang ilang designated lot ay may habang lakaran papuntang entrance, kaya isipin ang lakarin kapag may bata, PWD o maleta.',
+          'Tandaan ang number/letter ng lot at ang pinaka-malapit na landmark (poste, tent, gate label) bago umalis ng sasakyan. Ito ang pinakamadaling paraan para mahanap pabalik.',
+        ],
+      },
     ],
     faq: [
       {
@@ -437,6 +469,10 @@ export const topics: Topic[] = [
       {
         q: 'May fee ba ang parking?',
         a: 'Ang parking fee ay maaaring magbago bawat event. Huwag gamitin ang lumang halaga bilang kasalukuyang presyo — hintayin ang opisyal na advisory.',
+      },
+      {
+        q: 'Paano kung puno na ang inassign na lot?',
+        a: 'Sa event day, may alternate lot o overflow area na itinatakda ng organizer kapag puno na ang primary lot. Sundin ang direksyon ng parking marshal; huwag pumasok nang walang kumpirmasyon.',
       },
     ],
     updated: '2026-10-27',
@@ -652,6 +688,14 @@ export const topics: Topic[] = [
           'Magdala lamang ng maliit na bag para iwas-inspection delay. Ang mga malalaking bag ay mas mahaba ang pila.',
         ],
       },
+      {
+        id: 'examples',
+        title: 'Mga halimbawa',
+        body: [
+          'Karaniwang pinapayagan: maliit na sling bag, pouch, at gamit na kailangan sa loob (wallet, phone, fan, power bank).',
+          'Madalas hindi pinapayagan o limitado: malaking backpack, hard-case, at anumang bag na hindi kasya sa inspection lane. Ang medication at baby essentials ay karaniwang pinapayagan, ngunit ihanda ang pagpapakita kung hingiin.',
+        ],
+      },
     ],
     faq: [
       {
@@ -661,6 +705,10 @@ export const topics: Topic[] = [
       {
         q: 'Bakit mahigpit ang bag policy?',
         a: 'Para sa crowd safety. Ang organizer at security ng venue ang nagtatakda ng rules bawat event.',
+      },
+      {
+        q: 'Puwede ba ang power bank, payong at diaper bag?',
+        a: 'Ang power bank ay karaniwang pinapayagan (small personal item). Ang payong ay madalas nasa prohibited list dahil sa matulis na dulo o space. Ang diaper bag ay maaaring payagan para sa baby, ngunit isasailalim sa inspection — ihanda ang kumpirmasyon kung kinakailangan.',
       },
     ],
     updated: '2026-10-27',
@@ -692,6 +740,14 @@ export const topics: Topic[] = [
           'Huwag umasa sa listahan ng nakaraang event. Ang opisyal na event advisory ang palaging masusunod.',
         ],
       },
+      {
+        id: 'more',
+        title: 'Iba pang karaniwang bawal',
+        body: [
+          'Kasama rin madalas sa restricted: vape/e-cigarette (depende sa event rules), selfie stick at tripod, laser pointer, at anumang bagay na pwedeng ikapahamak ng crowd.',
+          'Ang medication ay maaaring dalhin, ngunit kadalasang kailangang ipakita o ipa-clear sa medical/security team. Maghanda ng reseta kung available.',
+        ],
+      },
     ],
     faq: [
       {
@@ -701,6 +757,10 @@ export const topics: Topic[] = [
       {
         q: 'Puwede ba ang professional camera?',
         a: 'Madalas itong bawal o limitado, lalo na sa concert. Ang event advisory ang magtatakda kung puwede ang camera at recording gear.',
+      },
+      {
+        q: 'Puwede ba ang vape, selfie stick o laser pointer?',
+        a: 'Ang vape at laser pointer ay karaniwang bawal; ang selfie stick/tripod ay madalas limitado o bawal sa concert. Ang eksaktong listahan ay nakadepende sa event advisory — basahin ito bago umalis.',
       },
     ],
     updated: '2026-10-27',
@@ -846,11 +906,23 @@ export const topics: Topic[] = [
           'Kumain bago dumagsa ang crowd. Puwedeng humaba ang pila sa event days, kaya maagang kain ang mas ligtas.',
         ],
       },
+      {
+        id: 'tips',
+        title: 'Tips sa pagkain',
+        body: [
+          'Maghanda ng cash at gcash; hindi lahat ng maliliit na stall ay tumatanggap ng card. Ang menu ay karaniwang PH casual fare — rice meals, snacks, at drinks.',
+          'Kung may dietary need (vegetarian/halal), magtanong muna sa stall bago umorder; ang mga maliliit na kainan ay hindi laging may labeled option.',
+        ],
+      },
     ],
     faq: [
       {
         q: 'Saan pwede kumain malapit sa Philippine Arena?',
         a: 'Sa Ciudad de Victoria at Bocaue may cafés, food stalls at kainan tulad ng Bocaue Plaza Centralle, OK Cafe, Lugajuan at Forest Cafe. I-check ang event-day hours.',
+      },
+      {
+        q: 'May vegetarian o halal option ba malapit sa arena?',
+        a: 'May mga stall at café sa Ciudad de Victoria at Bocaue, ngunit hindi laging may labeled vegetarian o halal menu. Magtanong muna sa stall, at kung mahigpit ang dietary need, mas ligtas kumain sa Metro Manila bago bumiyahe.',
       },
     ],
     updated: '2026-10-27',
@@ -1194,11 +1266,23 @@ export const topics: Topic[] = [
           'Ang eksaktong section, row at presyo ay nakadepende sa event at ticketing partner. Basahin ang seat map sa ticket page bago bumili.',
         ],
       },
+      {
+        id: 'view',
+        title: 'View at sound bawat zone',
+        body: [
+          'Patron / Lower Box — pinakamalapit sa stage; ramdam ang energy at malinaw ang performer, ngunit mataas ang presyo.',
+          'Upper Box — nakaharap pa rin sa stage at may buong view ng dome, ngunit mas malayo at mas maliit ang tao sa screen. General Admission / Floor ay standing, kaya depende sa height at pwesto ang view.',
+        ],
+      },
     ],
     faq: [
       {
         q: 'Ano ang pinakamagandang seat sa Philippine Arena?',
         a: 'Depende sa budget at preference. Ang Patron/Lower Box ay malapit sa stage; ang Upper Box ay mas abot-kaya. Ang seat map ng ticketing partner ang laging batayan.',
+      },
+      {
+        q: 'Masyado bang malayo ang Upper Box?',
+        a: 'Hindi gaanong malayo dahil nakatutok ang bowl sa iisang stage at may malalaking screen sa loob. Kung budget-friendly ang habol, ang Upper Box ay solid na choice — basta handa sa mas mahabang lakaran pababa at pataas.',
       },
     ],
     updated: '2026-10-27',
@@ -1266,11 +1350,23 @@ export const topics: Topic[] = [
           'Maglakad palabas ng main congestion bago mag-book ng Grab/taxi. Magtakda ng meeting point sa pickup zone.',
         ],
       },
+      {
+        id: 'wait',
+        title: 'Saan maghintay at gaano katagal',
+        body: [
+          'Ang paglabas ay karaniwang tumatagal ng ilang oras sa pinakamalaking concert. Mas mainam na lumapit sa designated pickup zone kaysa sa pagtayo sa mismong gate.',
+          'Kung may kasama, magtakda ng fixed meeting point bago maghiwalay. Ang signal ay madalas mahina pagkatapos ng show, kaya text/call plan ang kailangan.',
+        ],
+      },
     ],
     faq: [
       {
         q: 'Bakit matagal ang uwian pagkatapos ng concert?',
         a: 'Dahil sa crowd control at road closure. Maghanda sa mabagal na exit at mahirap na ride-hailing agad pagkatapos ng show.',
+      },
+      {
+        q: 'Ilang oras bago makauwi pagkatapos ng concert?',
+        a: 'Walang fixed oras, ngunit sa major event ay asahan ang 1–2 oras (o higit pa) mula sa paglabas ng gate hanggang makasakay at makalabas ng complex. Ang traffic sa NLEX pabalik ng Metro Manila ay maaari ring humaba.',
       },
     ],
     updated: '2026-10-27',
