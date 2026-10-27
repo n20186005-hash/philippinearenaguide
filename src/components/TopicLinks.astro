@@ -1,0 +1,32 @@
+---
+import { PILLARS, getTopic, type Pillar } from '../data/topics';
+
+const pillarKeys = Object.keys(PILLARS) as Pillar[];
+const cards = pillarKeys.map((key) => {
+  const meta = PILLARS[key];
+  const main = getTopic(meta.main)!;
+  return { key, meta, main };
+});
+---
+
+<section class="section" id="guides" aria-labelledby="guides-title">
+  <div class="shell">
+    <span class="eyebrow">Higit pang gabay</span>
+    <h2 class="section-title" id="guides-title">Planuhin ang buong biyahe</h2>
+    <p class="section-copy">
+      Hindi lang isang pahina ang Philippine Arena. Piliin ang topic para sa mas malalim na sagot — mula saan, parking, rules, kainan at event-day.
+    </p>
+    <div class="pillar-cards">
+      {cards.map(({ meta, main }) => (
+        <a class="pillar-card" href={`/${meta.main}/`}>
+          <div>
+            <small>{meta.label}</small>
+            <h3>{main.titleTagalog}</h3>
+            <p>{meta.lead}</p>
+          </div>
+          <span class="go">Tingnan →</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

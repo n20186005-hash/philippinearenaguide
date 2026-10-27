@@ -1,0 +1,202 @@
+---
+import '../styles/global.css';
+import Logo from './Logo.astro';
+import { PILLARS, getTopicsByPillar, type Topic } from '../data/topics';
+
+interface Props {
+  topic: Topic;
+}
+const { topic } = Astro.props;
+
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const siteUrl = Astro.site ? new URL('/', Astro.site).href : undefined;
+const ogImage = Astro.site ? new URL('/images/arena-exterior.webp', Astro.site).href : '/images/arena-exterior.webp';
+const mapsLink = 'https://maps.app.goo.gl/hV46DyaXKuRxUWwAA';
+
+const pillar = PILLARS[topic.pillar];
+const related = getTopicsByPillar(topic.pillar).filter((t) => t.slug !== topic.slug);
+const pillarUrl = siteUrl ? `${siteUrl}${pillar.main}/` : `/${pillar.main}/`;
+
+const mapsCheckedOn = '2026-10-27';
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Philippine Arena Guide', item: siteUrl },
+    { '@type': 'ListItem', position: 2, name: pillar.label, item: pillarUrl },
+    { '@type': 'ListItem', position: 3, name: topic.titleTagalog, item: canonical },
+  ],
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: topic.faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+
+const webPageSchema: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: topic.metaTitle,
+  description: topic.metaDescription,
+};
+if (canonical) webPageSchema.url = canonical;
+if (siteUrl) {
+  webPageSchema.isPartOf = { '@type': 'WebSite', name: 'Philippine Arena Guide', url: siteUrl };
+  webPageSchema.about = {
+    '@type': ['EventVenue', 'TouristAttraction'],
+    name: 'Philippine Arena',
+    '@id': `${siteUrl}#venue`,
+  };
+}
+---
+
+<!doctype html>
+<html lang="fil">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#091017" />
+    <title>{topic.metaTitle}</title>
+    <meta name="description" content={topic.metaDescription} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Philippine Arena Guide" />
+    <meta property="og:title" content={topic.metaTitle} />
+    <meta property="og:description" content={topic.metaDescription} />
+    <meta property="og:image" content={ogImage} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta property="og:locale" content="fil_PH" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={topic.metaTitle} />
+    <meta name="twitter:description" content={topic.metaDescription} />
+    <meta name="twitter:image" content={ogImage} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/favicon-16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify(webPageSchema)}></script>
+  </head>
+  <body>
+    <header>
+      <div class="shell nav">
+        <Logo />
+        <nav class="nav-links" aria-label="Pangunahing nabigasyon">
+          <a href="/#biyahe">Biyahe</a>
+          <a href="/#parking">Parking</a>
+          <a href="/#rules">Rules</a>
+          <a href="/#malapit">Malapit</a>
+          <a href="/#hotels">Hotel</a>
+          <a href="/#faq">FAQ</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="section topic-hero" aria-labelledby="topic-title">
+        <div class="shell">
+          <nav class="crumbs" aria-label="Breadcrumb">
+            <a href="/">Philippine Arena Guide</a>
+            <span aria-hidden="true">/</span>
+            <a href={pillarUrl}>{pillar.label}</a>
+            <span aria-hidden="true">/</span>
+            <span>{topic.titleTagalog}</span>
+          </nav>
+          <span class="eyebrow">{pillar.label}</span>
+          <h1 id="topic-title">{topic.h1}</h1>
+          <div class="topic-lead">
+            {topic.intro.map((p) => <p>{p}</p>)}
+          </div>
+        </div>
+      </section>
+
+      {topic.sections.map((section) => (
+        <section class="section topic-section" id={section.id} aria-labelledby={`${section.id}-title`}>
+          <div class="shell">
+            <h2 id={`${section.id}-title`}>{section.title}</h2>
+            {section.body.map((p) => <p>{p}</p>)}
+          </div>
+        </section>
+      ))}
+
+      <section class="section topic-section" id="faq" aria-labelledby="faq-title">
+        <div class="shell">
+          <span class="eyebrow">FAQ</span>
+          <h2 id="faq-title">Mga tanong bago pumunta</h2>
+          <div class="faq-list">
+            {topic.faq.map((item) => (
+              <details>
+                <summary>{item.q}</summary>
+                <p>{item.a}</p>
+              </details>
+            ))}
+          </div>
+          <div class="topic-nav">
+            <a href="/#faq">Lahat ng FAQ sa pangunahing pahina →</a>
+            <a href={pillarUrl}>Iba pang {pillar.label} →</a>
+          </div>
+        </div>
+      </section>
+
+      {related.length > 0 && (
+        <section class="section related" aria-labelledby="related-title">
+          <div class="shell">
+            <h2 id="related-title">Kaugnay na gabay</h2>
+            <div class="nearby-grid">
+              {related.map((r) => (
+                <a class="place" href={`/${r.slug}/`}>
+                  <small>{PILLARS[r.pillar].label}</small>
+                  <h3>{r.titleTagalog}</h3>
+                  <p>{r.metaDescription}</p>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <section class="credits" aria-label="Mga sanggunian">
+        <div class="shell">
+          <strong>Mga sanggunian:</strong>
+          Guinness World Records, Populous, current travel listings at NLEX/event transport guides. Ang {mapsCheckedOn} na review snapshot ay mula sa
+          <a href={mapsLink} target="_blank" rel="noopener"> Google Maps listing ng Philippine Arena</a>. Ang seating, bag policy at tuluyan ay inilalarawan bilang pangkalahatang gabay — ang opisyal na advisory ng organizer at ticketing partner ang palaging masusunod.
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="shell">
+        <div class="footer-sources">
+          <span class="footer-sources-title">Opisyal at awtoritatibong sanggunian:</span>
+          <a href="https://www.tourism.gov.ph/" target="_blank" rel="noopener">Department of Tourism (Pilipinas)</a>
+          <a href="https://bulacan.gov.ph/" target="_blank" rel="noopener">Pamahalaang Panlalawigan ng Bulacan</a>
+          <a href="https://en.wikipedia.org/wiki/Philippine_Arena" target="_blank" rel="noopener">Wikipedia: Philippine Arena</a>
+          <a href={mapsLink} target="_blank" rel="noopener">Google Maps — Philippine Arena</a>
+        </div>
+        <div class="footer-grid">
+          <div>
+            <Logo />
+            <p class="footer-statement">Independenteng gabay sa pagbisita lamang ito at hindi opisyal na website, hindi kaanib, at hindi ineendorso ng Philippine Arena, Iglesia Ni Cristo, Ciudad de Victoria, event organizers o ticketing partners.</p>
+          </div>
+          <div class="footer-links">
+            <a href="/#plano">Ticket / Bayad</a>
+            <a href="/#seating">Seating Plan</a>
+            <a href="/#biyahe">Transportasyon</a>
+            <a href="/#parking">Parking</a>
+            <a href="/#rules">Venue Rules</a>
+            <a href="/#hotels">Hotel</a>
+            <a href="/#faq">FAQ</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

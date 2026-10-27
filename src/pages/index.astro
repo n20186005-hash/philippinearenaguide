@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Logo from '../components/Logo.astro';
+import TopicLinks from '../components/TopicLinks.astro';
 
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
 const siteUrl = Astro.site ? new URL('/', Astro.site).href : undefined;
@@ -224,6 +225,7 @@ const faqSchema = {
           <a href="#rules">Rules</a>
           <a href="#malapit">Malapit</a>
           <a href="#hotels">Hotel</a>
+          <a href="#guides">Gabay</a>
           <a href="#faq">FAQ</a>
         </nav>
       </div>
@@ -483,6 +485,8 @@ const faqSchema = {
           </div>
         </div>
       </section>
+
+      <TopicLinks />
 
       <section class="credits" aria-label="Mga sanggunian at photo credits">
         <div class="shell">
